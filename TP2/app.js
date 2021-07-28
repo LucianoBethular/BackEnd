@@ -46,3 +46,6 @@ function operacione(operacion, a, b) {
 ;
 operacione("sumar", 1, 2).then((e) => { console.log(e); }).catch(err => console.log(err));
 operacione("restar", 345, 3).then((e) => { console.log(e); }).catch(err => console.log(err));
+
+
+

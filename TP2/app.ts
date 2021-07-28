@@ -19,3 +19,12 @@ async function operacione(operacion:string, a:number,b:number) {
 
 operacione("sumar", 1,2).then((e)=>{console.log(e)}).catch(err => console.log(err))
 operacione("restar", 345,3).then((e)=>{console.log(e)}).catch(err => console.log(err))
+
+
+
+
+
+
+
+
+
