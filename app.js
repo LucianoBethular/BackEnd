@@ -27,11 +27,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function operacion() {
+function operacione(operacion, a, b) {
     return __awaiter(this, void 0, void 0, function* () {
-        let { Suma } = yield Promise.resolve().then(() => __importStar(require("./operaciones")));
-        let sumar = new Suma(3, 5);
-        return sumar.ver();
+        switch (operacion) {
+            case "sumar":
+                let { Suma } = yield Promise.resolve().then(() => __importStar(require("./operaciones")));
+                let sumar = new Suma(a, b);
+                return sumar.ver();
+                break;
+            case "restar":
+                let { Resta } = yield Promise.resolve().then(() => __importStar(require("./operaciones")));
+                let restar = new Resta(a, b);
+                return restar.ver();
+                break;
+        }
     });
 }
-operacion();
+;
+operacione("sumar", 1, 2).then((e) => { console.log(e); }).catch(err => console.log(err));
+operacione("restar", 345, 3).then((e) => { console.log(e); }).catch(err => console.log(err));
