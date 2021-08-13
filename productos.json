@@ -1,0 +1,20 @@
+[
+	{
+		"name": "leche",
+		"precio": "$120",
+		"thumbnail": "https://www.laserenisimavaatucasa.com.ar/wp-content/uploads/2021/04/7790742357205.png",
+		"id": 0
+	},
+	{
+		"name": "fideos",
+		"precio": "$70",
+		"thumbnail": "https://http2.mlstatic.com/D_NQ_NP_857107-MLA31132568222_062019-O.jpg",
+		"id": 1
+	},
+	{
+		"name": "coca cola",
+		"precio": "$150",
+		"thumbnail": "https://http2.mlstatic.com/D_NQ_NP_956729-MLA41482479628_042020-O.jpg",
+		"id": 2
+	}
+]
