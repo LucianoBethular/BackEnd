@@ -38,6 +38,32 @@ else
 res.send("esto no es un numero ")
 });
 
+app.put('/api/productos/actualizar/:id', (req, res)=>{
+    if(!isNaN(req.params.id))
+    {
+        let id = parseInt(req.params.id, 10);
+        if (id > 0 && id <= productos.length)
+        res.json(productos[req.params.id-1]); 
+        else 
+        res.send("producto no existe")
+    }
+    else 
+    res.send("esto no es un numero ")
+    });
+
+    app.delete('/api/productos/borrar/:id', (req, res)=>{
+        if(!isNaN(req.params.id))
+        {
+            let id = parseInt(req.params.id, 10);
+            if (id > 0 && id <= productos.length)
+            res.json(productos[req.params.id-1]); 
+            else 
+            res.send("producto no existe")
+        }
+        else 
+        res.send("esto no es un numero ")
+        });
+
 app.post('/api/productos/guardar', (req, res,)=>{
     
 
