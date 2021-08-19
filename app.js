@@ -15,6 +15,7 @@ console.log(`servidor escuchando en puerto ${server.address().port}`)}
 server.on("error",error => console.log(`Error en servidor ${error}`));
 
 app.use(express.json());
+app.use(express.static('/public'))
 app.get('/api/productos/listar', (req, res)=>{
     if (productos.length == 0 )
     res.send("error no hay productos cargados")
