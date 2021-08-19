@@ -1,37 +1,45 @@
 
 import express from 'express';
 
-const fs = require('fs');
-
 
 const app = express()
 
-const PORT = 3000;
+const PORT = 8080;
+
+const productos = []
+
 
 const server = app.listen(PORT, () =>{
-console.log(`servidor escuchando en puerto ${server.adress().port}`)}
+console.log(`servidor escuchando en puerto ${server.address().port}`)}
 )
 server.on("error",error => console.log(`Error en servidor ${error}`));
 
-
+app.use(express.json());
 app.get('/api/productos/listar', (req, res)=>{
-    fs.promises.readFile("./productos").then(data=> data.toString('utf-8')).then(datos =>
-        {
-            const json = JSON.parse(datos)
-            res.json({items:[json], cantidad:(json.length) })
-        })
+    if (productos.length == 0 )
+    res.send("error no hay productos cargados")
+    else
+    res.json({items: productos, cantidad:productos.length})
+        
 });
 
 
-app.get('/api/productos/listar/id', (req, res)=>{
-let random = (min, max) => {return Math.floor(Math.random() * (max-min) + min)}
-fs.promises.readFile("./productos").then(data=> data.toString('utf-8')).then(datos =>
-    {
-        const json = JSON.parse(datos)
-        res.json({item: json[random(0,jason.length-1)]})
-    })
+app.get('/api/productos/listar/:id', (req, res)=>{
+if(!isNaN(req.params.id))
+{
+    let id = parseInt(req.params.id, 10);
+    if (id > 0 && id <= productos.length)
+    res.json(productos[req.params.id-1]); 
+    else 
+    res.send("producto no existe")
+}
+else 
+res.send("esto no es un numero ")
 });
 
-app.post('/api/productos/guardar', (req, res)=>{
+app.post('/api/productos/guardar', (req, res,)=>{
+    
 
+    productos.push({...req.body, id:productos.length })
+    res.json(req.body)
 })
