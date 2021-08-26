@@ -2,6 +2,7 @@ import express from 'express';
 
 const app = express();
 const router = express.Router();
+const productos = []
 
 app.use(express.json());
 
@@ -54,10 +55,18 @@ router.put('/api/productos/actualizar/:id', (req, res)=>{
         });
 
 router.post('/api/productos/guardar', (req, res,)=>{
-    
+    let name = req.body.producto;
+    let price = req.body.precio;
+    let thumbnail= req.body.foto;
 
-    productos.push({...req.body, id:productos.length })
-    res.json(req.body)
+    const producto = {
+        name : name,
+        price : price,
+        thumbnail : thumbnail
+    }
+
+    productos.push({...producto, id:productos.length })
+    res.json(producto)
 })
 
 module.exports = router; 
