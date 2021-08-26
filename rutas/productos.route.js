@@ -6,7 +6,7 @@ const productos = []
 
 app.use(express.json());
 
-router.get('/api/productos/listar', (req, res)=>{
+router.get('/api/productos/vista', (req, res)=>{
     if (productos.length == 0 )
     res.send("error no hay productos cargados")
     else
