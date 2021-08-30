@@ -9,7 +9,13 @@ router.use(function timeLog(req, res, next) {
     console.log('Time: ', Date.now());
     next();
 });
+router.get("/", (req,res )=>{
+  res.render("index", console.log("HOLA"))
+})
 
+router.get("/api/productos/vistas", (req,res )=>{
+  res.render("main", {productos:[{id:3 ,name:"hola", precio:"20"}]})
+})
 router.get("/api/productos/listar", (req, res) => {
 if (productos.length == 0) res.send("error no hay productos cargados");
 else res.json({ items: productos, cantidad: productos.length });
