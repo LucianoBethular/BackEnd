@@ -14,7 +14,7 @@ router.get("/", (req,res )=>{
 })
 
 router.get("/api/productos/vistas", (req,res )=>{
-  res.render("main", {productos:[{id:3 ,name:"hola", precio:"20"}]})
+  res.render("main", {productos})
 })
 router.get("/api/productos/listar", (req, res) => {
 if (productos.length == 0) res.send("error no hay productos cargados");

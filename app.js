@@ -38,10 +38,10 @@ app.engine("hbs", handlebars({
 app.set("view engine", "hbs");
 app.set("views", "./views")
 app.use(express.static(__dirname + 'public'))
-
+app.use(express.urlencoded())
 
 app.get("/api/productos/vistas", (req,res )=>{
-    res.render("main", {productos:[{id:3 ,name:"hola", precio:"20"}]})
+    res.render("main", {productos})
 })
 
 app.get("/", (req,res )=>{
@@ -49,26 +49,28 @@ app.get("/", (req,res )=>{
 })
 
 app.get("/api", (req,res )=>{
-    res.render("index", {})
+    res.render("index", {titulo: "Pagina principal"})
 })
 
 app.get("/api/productos/guardar",  (req, res) => {
-    res.render("index",{titulo: "complete para guardar item"} )
+    res.render("index",{productos, titulo:"Complete los campos para agregar objeto"} )
 
 }); 
 
 
 app.post("/api/productos/guardar", (req, res) => {
-    let name = req.body.producto;
-    let price = req.body.precio;
-    let thumbnail = req.body.foto;
-    const producto = {
-    name: name,
-    price: price,
-    thumbnail: thumbnail,
-    };
-    productos.push({ ...producto, id: productos.length });
-    res.json(producto);
-});
+//    let name = req.body.producto;
+//    let price = req.body.precio;
+//    let thumbnail = req.body.foto;
+//    const producto = {
+//    name: name,
+//    price: price,
+//    thumbnail: thumbnail,
+//    };
+    productos.push({ ...req.body,  id: productos.length });
+res.render("index", {productos, titulo:"Complete los campos para agregar objeto"})
+// console.log(productos)
+//    res.json(productos)
 
+});
 

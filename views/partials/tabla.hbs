@@ -1,39 +1,28 @@
-    <div>
-        <form id="guardar" action="/api/productos/guardar" method="post"></form>
-    <div class="input-group mb-3">
-        
+{{#if productos.length }}
 
+<table class="table table-dark table-hover">
+<thead>
+    <tr>
+    <th scope="col">Item</th>
+    <th scope="col">Producto</th>
+    <th scope="col">Precio</th>
+    <th scope="col">Foto</th>
+    </tr>
+</thead>
+{{#each productos}}
+<tbody>
+    <tr>
+    <th scope="row">{{this.id}}</th>
+    <td>{{this.producto}}</td>
+    <td>{{this.precio}}</td>
+    <td>{{this.foto}}</td>
+    </tr>
 
-  <span class="input-group-text" id="basic-addon1">Nombre del producto</span>
-  <input type="text" name="producto" class="form-control" placeholder="EJ: Azucar" aria-label="EJ: Azucar" aria-describedby="basic-addon1">
-</div>
+</tbody>
+{{/each}}
+</table>
 
-   <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Precio del producto</span>
-  <input type="text" name="precio" class="form-control" placeholder="EJ: 55" aria-label="EJ: 55" aria-describedby="basic-addon1">
-</div>
+{{else}}
+<h2>No hay productos disponibles</h2>
 
-   <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Foto del producto</span>
-  <input type="text" name="foto" class="form-control" placeholder="URL de imagen del producto" aria-label="URL de imagen del producto" aria-describedby="basic-addon1">
-</div>
-
-    <input id="agregar" onclick="agregarItem" type="submit" value="Enviar la información">
-    </form>
-</div>
-
-<script>
-const formGuardar = document.querySelector("#guardar")
-const formData = new FormData (formGuardar)
-
-formGuardar.addEventListener("submit", event => {
-    event.preventDefault();
-    fetch("/api/productos/guardar", {
-        method: "POST",
-        body: formData
-    })
-    .then(res  => res.json())
-    .then(data =>productos.push({ ...data, id: productos.length })
-})
-
-</script>
+{{/if}}
