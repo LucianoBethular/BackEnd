@@ -1,4 +1,4 @@
-const handlebars = require("express-handlebars")
+
 const express = require("express");
 
 
@@ -16,19 +16,11 @@ server.on("error", (error) => console.log(`Error en servidor ${error}`));
 
 app.use("/", require("./rutas/productos.route"));
 app.use(express.json());
-app.engine("hbs", handlebars({
-    extname:".hbs",
-    defaultLayout:"main.hbs",
-    layoutsDir: __dirname + "/views/layouts",
-    partialsDir: __dirname + "/views/partials",
-}
-))
-app.set("view engine", "hbs");
+
+app.set("view engine", "pug");
 app.set("views", "./views")
 app.use(express.static(__dirname + 'public'))
 app.use(express.urlencoded())
-
-
 
 
 

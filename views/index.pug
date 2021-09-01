@@ -1,0 +1,27 @@
+html 
+    head 
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous")
+        title Formulario en Pug 
+    body 
+        div(class="col-md-4 mx-auto" style="margin-top: 2em;")
+            div(class="card text-center")
+                div(class="card-header")
+                    h4=titulo
+                div(class="card-body")
+                form(action="/api/productos/guardar-datos" method="post")
+                    div(class="form-group")
+                        input(type="text" name="producto" class="form-control" placeholder="Producto" autofocus)
+                        br
+                    div(class="form-group")
+                        input(type="text" name="precio" class="form-control" placeholder="Precio del Producto" )
+                        br
+                    div(class="form-group")
+                        input(type="text" name="foto" class="form-control" placeholder="URL del producto" )
+                        br
+                    div(class="form-group")
+                        input(type="submit" class="btn btn-primary")
+            br  
+            include ./partials/tabla.pug
+
+
+            script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous") 
