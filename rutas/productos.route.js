@@ -1,9 +1,9 @@
-const handlebars = require("express-handlebars")
+
 const express = require("express");
 
 const router = express.Router();
 
-const productos = [];
+
 
 
 
@@ -15,8 +15,10 @@ router.use(function timeLog(req, res, next) {
 });
 
 
+const productos = [];
 
-
+router.use(express.urlencoded({extended:true}))
+router.use(express.json());
 router.get("/api", (req,res )=>{
     res.render("index", {titulo: "Pagina principal"})
 })
@@ -48,20 +50,22 @@ router.put("/api/productos/actualizar/:id", (req, res) => {
   if (!isNaN(req.params.id)) {
     let id = parseInt(req.params.id, 10);
     if (id > 0 && id <= productos.length)
-      res.json(productos[req.params.id - 1]);
+      res.json(productos[req.params.id - 1]+"ha sido actualizado");
     else res.send("producto no existe");
   } else res.send("esto no es un numero ");
 });
 
+
+
 router.delete("/api/productos/borrar/:id", (req, res) => {
+  
   if (!isNaN(req.params.id)) {
     let id = parseInt(req.params.id, 10);
     if (id > 0 && id <= productos.length)
-    res.json(productos[req.params.id - 1]);
+      res.json(productos[req.params.id - 1]+"ha sido borrado");
     else res.send("producto no existe");
-} else res.send("esto no es un numero ");
+  } else res.send("esto no es un numero ");
 });
-
 
 
 router.get("/api/productos/guardar",  (req, res) => {
@@ -81,7 +85,7 @@ router.post("/api/productos/guardar-datos", (req, res) => {
   productos.push({ ...req.body,  id: productos.length });
 res.render("index", {productos, titulo:"Complete los campos para agregar objeto"})
 // console.log(productos)
-//    res.json(productos)
+  //res.json(productos)
 
 });
 
