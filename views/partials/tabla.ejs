@@ -1,0 +1,28 @@
+
+
+<%if(productos) {%>
+<table class="table table-dark table-hover">
+<thead>
+    <tr>
+    <th scope="col">Item</th>
+    <th scope="col">Producto</th>
+    <th scope="col">Precio</th>
+    <th scope="col">Foto</th>
+    </tr>
+</thead>
+<% productos.forEach(e => {%>
+<tbody>
+    <tr>
+    <th scope="row"><%= e.id %></th>
+    <td><%= e.producto %></td>
+    <td><%= e.precio %></td>
+    <td style="width: 50px"><img src=<%= e.foto %> alt="" style="width: 50px, heigth:50px;"></td>
+    </tr>
+</tbody>
+<% }); %>
+</table>
+<% } else { %>
+
+<h2>No hay productos disponibles</h2>
+
+<% } %>
