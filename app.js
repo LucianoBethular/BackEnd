@@ -1,36 +1,43 @@
-import express from 'express';
-const express = require('express');
-const fs = require('fs');
+const handlebars = require("express-handlebars")
+const express = require("express");
+const app = express();
+const http = require("http").Server(app)
+const io = require('socket.io')(http)
 
-const app = express()
 
 const PORT = 8080;
 
-const server = app.listen(PORT, () =>{
-console.log(`servidor escuchando en puerto ${server.adress().port}`)}
-)
-server.on("error",error => console.log(`Error en servidor ${error}`));
 
 
-app.get('/items', (req, res)=>{
-    fs.promises.readFile("./productos").then(data=> data.toString('utf-8')).then(datos =>
-        {
-            const json = JSON.parse(datos)
-            res.json({items:[json], cantidad:(json.length) })
-        })
+const server = http.listen(PORT, () => {
+console.log(`servidor escuchando en puerto ${server.address().port}`);
+});
+server.on("error", (error) => console.log(`Error en servidor ${error}`));
+
+
+
+
+io.sockets.on('connection', (socket)=> {
+    console.log("cliente conectado: " + socket.id)
+    io.sockets.emit('message ', "Hola usuario!!")
 })
 
 
-app.get('/item-random', (req, res)=>{
-let random = (min, max) => {return Math.floor(Math.random() * (max-min) + min)}
-fs.promises.readFile("./productos").then(data=> data.toString('utf-8')).then(datos =>
-    {
-        const json = JSON.parse(datos)
-        res.json({item: json[random(0,jason.length-1)]})
-    })
-})
+
+app.use("/", require("./rutas/productos.route"));
+app.use(express.json());
+app.engine("hbs", handlebars({
+    extname:".hbs",
+    defaultLayout:"main.hbs",
+    layoutsDir: __dirname + "/views/layouts",
+    partialsDir: __dirname + "/views/partials",
+}
+))
+app.set("view engine", "hbs");
+app.set("views", "./views")
+app.use(express.static(__dirname + 'public'))
+app.use(express.urlencoded())
 
 
-app.get('/visitas', (req, res)=>{
-    
-})
+
+
